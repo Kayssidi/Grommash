@@ -14,6 +14,7 @@ import Heading from 'grommet/components/Heading';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
 import Hero from 'grommet/components/Hero';
+import Image from 'grommet/components/Image';
 
 const MyApp = () => (
   <GrommetApp>
@@ -21,18 +22,23 @@ const MyApp = () => (
       Header
     </Header>
     <Article>
+
       <Section full='vertical'>
         <Hero
-          size='large'
+          background={<Image src='http://www.dogbreedslist.info/uploads/allimg/dog-pictures/Dachshund-2.jpg'
+            fit='cover'
+            full={true}/>}
+          size='small'
           backgroundColorIndex='dark'>
           <Heading margin='none'>
-            Sample Heading
+            Tunousoul Massage
           </Heading>
         </Hero>
       Section1
-
       </Section>
+
       <Section>Section2</Section>
+
     </Article>
     <Button primary label='Label'/>
     <Footer>
