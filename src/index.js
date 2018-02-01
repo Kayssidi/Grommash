@@ -4,29 +4,41 @@ import '../node_modules/grommet-css'
 
 import React from 'react';
 import { render } from 'react-dom';
-import Hello from './Hello';
 
+import GrommetApp from 'grommet/components/Grommet';
+
+import Header from 'grommet/components/Header';
+import Article from 'grommet/components/Article';
+import Section from 'grommet/components/Section';
+import Heading from 'grommet/components/Heading';
 import Button from 'grommet/components/Button';
-import Toast from 'grommet/components/Toast';
+import Footer from 'grommet/components/Footer';
+import Hero from 'grommet/components/Hero';
 
-const styles = {
-  fontFamily: 'sans-serif',
-  textAlign: 'center',
-};
+const MyApp = () => (
+  <GrommetApp>
+    <Header>
+      Header
+    </Header>
+    <Article>
+      <Section full='vertical'>
+        <Hero
+          size='large'
+          backgroundColorIndex='dark'>
+          <Heading margin='none'>
+            Sample Heading
+          </Heading>
+        </Hero>
+      Section1
 
-const bg = {
-
-  background: 'neutral-1',
-};
-const App = () => (
-  <div style={styles}>
-    <Hello name="CodeSandbox" />
-    <h2>Start editing to see some magic happen {'\u2728'}</h2>
-    <Button primary label='Label'
-      hoverIndicator={bg} 
-     />
-     <Toast>Hello</Toast>
-  </div>
+      </Section>
+      <Section>Section2</Section>
+    </Article>
+    <Button primary label='Label'/>
+    <Footer>
+      Juni 314
+    </Footer>
+  </GrommetApp>
 );
 
-render(<App />, document.getElementById('root'));
+render(<MyApp />, document.getElementById('root'));
