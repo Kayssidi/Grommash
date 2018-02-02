@@ -18,13 +18,11 @@ import Image from 'grommet/components/Image';
 import Card from 'grommet/components/Card';
 import Columns from 'grommet/components/Columns';
 import Box from 'grommet/components/Box';
-import DateTime from 'grommet/components/DateTime';
-import Form from 'grommet/components/Form';
-import FormField from 'grommet/components/FormField';
-import TextInput from 'grommet/components/TextInput';
 import Anchor from 'grommet/components/Anchor';
 import Quote from 'grommet/components/Quote';
 import Paragraph from 'grommet/components/Paragraph';
+
+import ReservationCard from './components/reservationCard';
 
 const MyApp = () => (
   <GrommetApp>
@@ -47,8 +45,8 @@ const MyApp = () => (
           background={<Image src='http://www.dogbreedslist.info/uploads/allimg/dog-pictures/Dachshund-2.jpg'
             fit='cover'
             full={true}/>}
-          size='small'
-          backgroundColorIndex='dark'>
+            size='small'
+            backgroundColorIndex='dark'>
           <Heading margin='none'>
             Tunousoul Massage
           </Heading>
@@ -57,25 +55,7 @@ const MyApp = () => (
         <Columns>
 
           <Box align='center' pad='medium' margin='medium' colorIndex='light-2' separator='all'>
-            <Card
-              heading='Réserver une séance'
-              description='Choisir une date et un crénau horaire.'
-              contentPad='none' >
-            <Form>
-              <FormField>
-                <DateTime id='id'
-                  name='name'
-                  format='D/M/YYYY'/>
-              </FormField>
-              <DateTime id='id'
-                name='name'
-                format='h a'/>
-              <Footer pad={{ "vertical": "medium" }}>
-                <Button label='Continuer'
-                        type='submit'
-                        primary={true}/>
-              </Footer>
-            </Form></Card>
+            <ReservationCard/>
           </Box>
 
           <Box align='center' pad='medium' margin='medium' colorIndex='light-2'>
@@ -93,7 +73,7 @@ const MyApp = () => (
       </Section>
 
       <Section align='center'>
-        <Quote credit='Juni Pi' emphasizeCredit='true'>
+        <Quote credit='Juni Pi' emphasizeCredit>
           <Paragraph>Im walking on sunshine</Paragraph>
           <Paragraph>woohoo</Paragraph>
         </Quote>
