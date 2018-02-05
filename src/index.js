@@ -26,21 +26,20 @@ import ReservationCard from './components/reservationCard';
 
 const MyApp = () => (
   <GrommetApp>
-    <Header>
-      Bienvenue
-      <Box flex={true}
-        justify='end'
-        direction='row'
-        responsive={true}
-        >
-        <Button label='Réserver'/>
-        <Button label='Contacter' />
-        <Button label='Information' />
-      </Box>
+    <Header size='small' responsive>
+          <Box responsive full='horizontal' justify='center' textAlign='center'>
+            <Anchor label='Réserver' href='#' />
+          </Box>
+          <Box responsive full='horizontal' justify='center' textAlign='center'>
+            <Anchor label='Contacter' href='#' />
+          </Box>
+          <Box responsive full='horizontal' justify='center' textAlign='center'>
+            <Anchor label='Information' href='#' />
+        </Box>
     </Header>
-    <Article>
+    <Article >
 
-      <Section>
+      <Section pad={{ vertical: 'none'}} >
         <Hero
           background={<Image src='http://www.dogbreedslist.info/uploads/allimg/dog-pictures/Dachshund-2.jpg'
             fit='cover'
