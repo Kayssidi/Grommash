@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 import Card from 'grommet/components/Card';
 import Form from 'grommet/components/Form';
-import FormField from 'grommet/components/FormField';
 import Select from 'grommet/components/Select';
+import Animate from 'grommet/components/Animate';
 
 import Footer from 'grommet/components/Footer';
 import Button from 'grommet/components/Button';
@@ -119,10 +119,11 @@ class ReservationCard extends React.Component {
             
             {
               this.state.stateDateSelected ?
-                <div>
-                  <Box direction='row' align='center' margin='small'>
-                    <Value value="8" size="small" />
-                    <Paragraph>Horaires disponibles le {moment(this.state.stateDateSelected).format('DD/MM/YYYY')}:</Paragraph>
+                <Animate enter={{ "animation": "slide-down", "duration": 500, "delay": 0 }}
+                         keep={true}>
+                  <Box direction='row' align='center' margin='small' >
+                    
+                    <Paragraph> <Value value="8" size="small" /> Horaires disponibles le {moment(this.state.stateDateSelected).format('DD/MM/YYYY')}:</Paragraph>
                   </Box>
 
                   <Box pad={{ horizontal: 'large' }} margin={{ bottom: 'small' }}>
@@ -133,15 +134,18 @@ class ReservationCard extends React.Component {
                       margin='small'
                     />
                   </Box>
-                </div> :
+                </Animate> :
                 <Paragraph>Choisir le jour de la séance</Paragraph>
             }
 
             {
               (this.state.stateDateSelected && this.state.stateTimeSelected) ?
-                <Box align='center'>
-                  <Button label={this.buttonTxt} type='submit' primary={true} />
-                </Box>
+                <Animate enter={{ "animation": "slide-down", "duration": 500, "delay": 0 }}
+                  keep={true}>
+                  <Box align='center' pad={{ horizontal: 'small', vertical: 'small' }}>
+                    <Button label={this.buttonTxt} type='submit' primary={true} />
+                  </Box>
+                </Animate>
                 : <div />
             }
             
