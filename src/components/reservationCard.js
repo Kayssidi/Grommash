@@ -44,38 +44,54 @@ const WEEKDAYS_LONG = [
 const WEEKDAYS_SHORT = ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'];
 
 class ReservationCard extends React.Component {
-  state = {
-    stateDateSelected:undefined,
-    stateTimeSelected:undefined,
-  };
 
-  buttonTxt = `Réserver le ${moment(this.state.stateDateSelected).format('DD/MM/YYYY')} 
-              à ${moment('09h00', ['H:m']).format('HH:mm')}`;
-              //à ${moment(this.state.stateTimeSelected, ['h:m a', 'H:m']).format('HH:mm')}`;
+  state = {}
 
-
-  constructor(props) {
+  constructor(props)
+  {
     super(props);
     this.state = { isToggleOn: true };
 
     // This binding is necessary to make `this` work in the callback
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleTimeClick = this.handleTimeClick.bind(this);
+
+    // Init React States
+    let disabledDate = [];
+    // disable a specific date
+    //disabledDate.push(new Date(2018, 2, 6));
+    // disable sunday
+    disabledDate.push({ daysOfWeek: [0] });
+    // disable date before today
+    disabledDate.push({ before: new Date() } );
+
+    this.state = {
+      stateDateSelected: undefined,
+      stateTimeSelected: undefined,
+      stateDisabledDate: disabledDate,
+    };
+
+    this.currentMonth = new Date();
   }
 
-  handleDayClick(day)
-  {
-    let previouslySelectedDate = this.state.stateDateSelected;
+  buttonTxt = `Réserver le ${moment(this.state.stateDateSelected).format('DD/MM/YYYY')} 
+              à ${moment('09h00', ['H:m']).format('HH:mm')}`;
+              //à ${moment(this.state.stateTimeSelected, ['h:m a', 'H:m']).format('HH:mm')}`;
 
-    if (moment(day).isSame(previouslySelectedDate))
+  handleDayClick(day, { selected, disabled })
+  {
+    if (disabled) return;
+
+    if (selected)
     {
       this.setState({ stateDateSelected: undefined });
-      this.setState({ stateTimeSelected: undefined });
     }
     else
     {
       this.setState({ stateDateSelected: day });
+      
     }
+    this.setState({ stateTimeSelected: undefined });
   }
 
   handleTimeClick(time)
@@ -99,36 +115,40 @@ class ReservationCard extends React.Component {
               weekdaysShort={WEEKDAYS_SHORT}
               firstDayOfWeek={1}
 
+              disabledDays={ this.state.stateDisabledDate }
+              fromMonth={this.currentMonth}
+
               onDayClick={ this.handleDayClick }
               selectedDays={this.state.stateDateSelected}
             />
 
             {
               this.state.stateDateSelected ?
-              <div>
-                  <Box direction='row' align='center'>
+                <div>
+                  <Box direction='row' align='center' margin='small'>
                       <Value value="8" size="small"/>
-                      <Paragraph> Horaires disponibles le {moment(this.state.stateDateSelected).format('DD/MM/YYYY')}:</Paragraph>
+                      <Paragraph>Horaires disponibles le {moment(this.state.stateDateSelected).format('DD/MM/YYYY')}:</Paragraph>
                   </Box>
 
-                  <Select placeHolder={this.state.stateTimeSelected}
-                    options={['09:00', '10h00', '11h00', '12h00', '13h00', '14h00', '15h00', '16h00']}
-                    value={this.state.stateTimeSelected}
-                    onChange={ this.handleTimeClick}
-                  />
-              </div>:
-              <Paragraph>Choisir le jour de la séance</Paragraph>
+                  <Box pad={{ horizontal: 'large' }} margin={{bottom:'small'}}>
+                    <Select placeHolder={this.state.stateTimeSelected}
+                      options={['09:00', '10h00', '11h00', '12h00', '13h00', '14h00', '15h00', '16h00']}
+                      value={this.state.stateTimeSelected}
+                      onChange={ this.handleTimeClick}
+                      margin='small'
+                    />
+                  </Box>
+                </div>:
+                <Paragraph>Choisir le jour de la séance</Paragraph>
             }       
 
-          
-          {
-            (this.state.stateDateSelected && this.state.stateTimeSelected) ?
-                <Button label={this.buttonTxt}
-                      type='submit'
-                      primary={true} />:
-              <div/>
-          }
-
+            {
+              (this.state.stateDateSelected && this.state.stateTimeSelected) ?
+                <Box align='center'>
+                  <Button label={this.buttonTxt} type='submit' primary={true}/>
+                </Box>
+                : <div/>
+            }
           </Box>
         </Form>
       </Card>
