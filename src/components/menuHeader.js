@@ -16,8 +16,8 @@ import MailIcon from 'grommet/components/icons/base/Mail';
 class MenuHeader extends React.Component {
   state = {};
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this._onResponsive = this._onResponsive.bind(this);
   }
 
@@ -31,7 +31,6 @@ class MenuHeader extends React.Component {
 
   _onResponsive(small) {
     this.setState({ small });
-    console.log(this.state.small);
   }
 
   render() {

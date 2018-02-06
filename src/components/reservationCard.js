@@ -96,7 +96,6 @@ class ReservationCard extends React.Component {
 
   handleTimeClick(time)
   {
-    console.log(time);
     this.setState({ stateTimeSelected : time.value});
   }
 
