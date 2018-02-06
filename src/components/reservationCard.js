@@ -9,6 +9,8 @@ import Select from 'grommet/components/Select';
 import Footer from 'grommet/components/Footer';
 import Button from 'grommet/components/Button';
 import Paragraph from 'grommet/components/Paragraph';
+import Value from 'grommet/components/Value';
+import Box from 'grommet/components/Box';
 
 // http://react-day-picker.js.org/docs/getting-started/
 import DayPicker from 'react-day-picker';
@@ -68,6 +70,7 @@ class ReservationCard extends React.Component {
     if (moment(day).isSame(previouslySelectedDate))
     {
       this.setState({ stateDateSelected: undefined });
+      this.setState({ stateTimeSelected: undefined });
     }
     else
     {
@@ -88,8 +91,7 @@ class ReservationCard extends React.Component {
             description='Choisir une date et un crénau horaire.'
             contentPad='none' >
         <Form>
-          <FormField>
-
+          <Box separator='all' colorIndex='light-1' margin='small'>
             <DayPicker
               locale="fr"
               months={MONTHS}
@@ -104,7 +106,11 @@ class ReservationCard extends React.Component {
             {
               this.state.stateDateSelected ?
               <div>
-                  <Paragraph>Horaires disponibles le {moment(this.state.stateDateSelected).format('DD/MM/YYYY')}:</Paragraph>
+                  <Box direction='row' align='center'>
+                      <Value value="8" size="small"/>
+                      <Paragraph> Horaires disponibles le {moment(this.state.stateDateSelected).format('DD/MM/YYYY')}:</Paragraph>
+                  </Box>
+
                   <Select placeHolder={this.state.stateTimeSelected}
                     options={['09:00', '10h00', '11h00', '12h00', '13h00', '14h00', '15h00', '16h00']}
                     value={this.state.stateTimeSelected}
@@ -112,13 +118,9 @@ class ReservationCard extends React.Component {
                   />
               </div>:
               <Paragraph>Choisir le jour de la séance</Paragraph>
-            }
+            }       
 
-          </FormField>
-        
           
-
-          <Footer pad={{ "vertical": "medium" }}>
           {
             (this.state.stateDateSelected && this.state.stateTimeSelected) ?
                 <Button label={this.buttonTxt}
@@ -126,8 +128,8 @@ class ReservationCard extends React.Component {
                       primary={true} />:
               <div/>
           }
-          </Footer>
 
+          </Box>
         </Form>
       </Card>
     );

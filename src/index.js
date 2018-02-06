@@ -7,7 +7,6 @@ import { render } from 'react-dom';
 
 import GrommetApp from 'grommet/components/Grommet';
 
-import Header from 'grommet/components/Header';
 import Article from 'grommet/components/Article';
 import Section from 'grommet/components/Section';
 import Heading from 'grommet/components/Heading';
@@ -18,25 +17,16 @@ import Image from 'grommet/components/Image';
 import Card from 'grommet/components/Card';
 import Columns from 'grommet/components/Columns';
 import Box from 'grommet/components/Box';
-import Anchor from 'grommet/components/Anchor';
 import Quote from 'grommet/components/Quote';
 import Paragraph from 'grommet/components/Paragraph';
+import Anchor from 'grommet/components/Anchor';
 
 import ReservationCard from './components/reservationCard';
+import MenuHeader from './components/menuHeader';
 
 const MyApp = () => (
   <GrommetApp>
-    <Header size='small' responsive>
-          <Box responsive full='horizontal' justify='center' textAlign='center'>
-            <Anchor label='Réserver' href='#' />
-          </Box>
-          <Box responsive full='horizontal' justify='center' textAlign='center'>
-            <Anchor label='Contacter' href='#' />
-          </Box>
-          <Box responsive full='horizontal' justify='center' textAlign='center'>
-            <Anchor label='Information' href='#' />
-        </Box>
-    </Header>
+    <MenuHeader/>
     <Article >
 
       <Section pad={{ vertical: 'none'}} >
@@ -57,7 +47,7 @@ const MyApp = () => (
             <ReservationCard/>
           </Box>
 
-          <Box align='center' pad='medium' margin='medium' colorIndex='light-2'>
+          <Box align='center' pad='medium' margin='medium' colorIndex='light-2' separator='all'>
             <Card thumbnail='https://www.chien.fr/assets/img/000/291/large/massage-canin.jpg'
               heading='Le Massage Canin'
               description='En apprendre plus sur les bienfaits du massage canin'
@@ -79,9 +69,9 @@ const MyApp = () => (
       </Section>
 
     </Article>
-    <Button primary label='Label'/>
+
     <Footer>
-      Juni 314
+      
     </Footer>
   </GrommetApp>
 );
