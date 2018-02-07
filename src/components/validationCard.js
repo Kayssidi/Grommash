@@ -7,14 +7,15 @@ import FormField from "grommet/components/FormField";
 import TextInput from "grommet/components/TextInput";
 import Button from "grommet/components/Button";
 
-// http://grommet.io/docs/icon/
-import FavIcon from "grommet/components/icons/base/Favorite";
+import LikeIcon from "grommet/components/icons/base/Like";
 
-class DogInformationCard extends React.Component {
+class ValidationCard extends React.Component {
   state = {};
 
   constructor(props) {
     super(props);
+
+    //this.callbackFunction = this.callbackFunction.bind(this);
 
     /*
       this.state =
@@ -29,35 +30,23 @@ class DogInformationCard extends React.Component {
     return (
       <Form>
         <Card
-          label={<FavIcon />}
-          description="Dites nous en plus sur votre animal:"
+          label={<LikeIcon />}
+          description="Souhaitez vous nous communiquer une information supplémentaire avant de valider la réservation de la séance?"
           contentPad="none"
         >
-          <FormField label="Nom">
+          <FormField label="Dites nous tout ...">
             <TextInput />
           </FormField>
 
-          <FormField label="Age">
-            <TextInput />
-          </FormField>
-
-          <FormField label="Race">
-            <TextInput />
-          </FormField>
-
-          <FormField label="Eventuelle pathologie">
-            <TextInput />
-          </FormField>
-
-          <Button label="Valider" type="submit" primary={true} />
+          <Button label="Réserver la séance" type="submit" primary={true} />
         </Card>
       </Form>
     );
   }
 }
 
-DogInformationCard.propTypes = {
+ValidationCard.propTypes = {
   //classes: PropTypes.object.isRequired
 };
 
-export default DogInformationCard;
+export default ValidationCard;

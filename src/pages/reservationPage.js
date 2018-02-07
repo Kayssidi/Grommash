@@ -1,18 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Article from 'grommet/components/Article';
-import Section from 'grommet/components/Section';
-import Box from 'grommet/components/Box';
-import Accordion from 'grommet/components/Accordion';
-import AccordionPanel from 'grommet/components/AccordionPanel';
-import Columns from 'grommet/components/Columns';
+import Article from "grommet/components/Article";
+import Section from "grommet/components/Section";
+import Box from "grommet/components/Box";
+import Accordion from "grommet/components/Accordion";
+import AccordionPanel from "grommet/components/AccordionPanel";
+import Columns from "grommet/components/Columns";
 
-import ReservationCard from '../components/reservationCard';
-import DogInformationCard from '../components/dogInformationCard';
-import OwnerInformationCard from '../components/ownerInformationCard';
+import ReservationCard from "../components/reservationCard";
+import DogInformationCard from "../components/dogInformationCard";
+import OwnerInformationCard from "../components/ownerInformationCard";
+import ValidationCard from "../components/validationCard";
 
-import DayPicker from 'react-day-picker';
+import DayPicker from "react-day-picker";
 
 class MainPage extends React.Component {
   state = {};
@@ -31,41 +32,64 @@ class MainPage extends React.Component {
 
   render() {
     return (
-      <Article >
-
+      <Article>
         <Section>
-          <Accordion active={[1,2]} openMulti={true}>
-
-            <AccordionPanel heading='Réservation de la séance'>
-              <Columns justify='center'>
-                <Box align='center' pad='medium' margin='medium' colorIndex='light-2' separator='all'>
-                  <ReservationCard
-                    propsDateSelected={new Date(2018, 1, 28)}
-                  />
+          <Accordion active={[1]} openMulti={true}>
+            <AccordionPanel heading="Réservation de la séance">
+              <Columns justify="center">
+                <Box
+                  align="center"
+                  pad="medium"
+                  margin="medium"
+                  colorIndex="light-2"
+                  separator="all"
+                >
+                  <ReservationCard propsDateSelected={new Date(2018, 1, 28)} />
                 </Box>
               </Columns>
             </AccordionPanel>
-          
-            <AccordionPanel heading='Information'>
-                <Columns justify='center'>
-                  <Box align='center' pad='medium' margin='medium' colorIndex='light-2' separator='all'>
-                    <OwnerInformationCard/>
-                  </Box>
 
-                  <Box align='center' pad='medium' margin='medium' colorIndex='light-2' separator='all'>
-                    <DogInformationCard />
-                  </Box>
-                </Columns>
+            <AccordionPanel heading="Vos Information">
+              <Columns justify="center">
+                <Box
+                  align="center"
+                  pad="medium"
+                  margin="medium"
+                  colorIndex="light-2"
+                  separator="all"
+                >
+                  <OwnerInformationCard />
+                </Box>
+
+                <Box
+                  align="center"
+                  pad="medium"
+                  margin="medium"
+                  colorIndex="light-2"
+                  separator="all"
+                >
+                  <DogInformationCard />
+                </Box>
+              </Columns>
             </AccordionPanel>
 
+            <AccordionPanel heading="Validation">
+              <Columns justify="center">
+                <Box
+                  align="center"
+                  pad="medium"
+                  margin="medium"
+                  colorIndex="light-2"
+                  separator="all"
+                >
+                  <ValidationCard />
+                </Box>
+              </Columns>
+            </AccordionPanel>
           </Accordion>
-
         </Section>
 
-        <Section>
-
-        </Section>
-
+        <Section />
       </Article>
     );
   }
@@ -75,4 +99,4 @@ MainPage.propTypes = {
   //classes: PropTypes.object.isRequired
 };
 
-export default (MainPage);
+export default MainPage;
