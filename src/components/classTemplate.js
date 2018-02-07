@@ -7,6 +7,8 @@ class ClassTemplate extends React.Component {
   constructor(props) {
     super(props);
     
+    //this.callbackFunction = this.callbackFunction.bind(this);
+    
     /*
       this.state =
       {

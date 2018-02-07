@@ -6,6 +6,10 @@ import Box from 'grommet/components/Box';
 import Anchor from 'grommet/components/Anchor';
 import Responsive from 'grommet/utils/Responsive';
 
+import Heading from 'grommet/components/Heading';
+import Hero from 'grommet/components/Hero';
+import Image from 'grommet/components/Image';
+
 // http://grommet.io/docs/icon/
 import FavIcon from 'grommet/components/icons/base/Favorite';
 import HelpIcon from 'grommet/components/icons/base/Help';
@@ -35,6 +39,7 @@ class MenuHeader extends React.Component {
 
   render() {
     return (
+    <div>
       <Header size='small' colorIndex='light-2'>
 
         <Box responsive full='horizontal' justify='center' textAlign='center'>
@@ -52,7 +57,6 @@ class MenuHeader extends React.Component {
         </Box>
 
         <Box responsive full='horizontal' justify='center' textAlign='center'>
-          
           {this.state.small ?
             <Anchor icon={<HelpIcon />} label='' href='#' /> :
             <Anchor icon={<HelpIcon />} label='Information' href='#' />
@@ -60,6 +64,17 @@ class MenuHeader extends React.Component {
         </Box>
 
       </Header>
+      <Hero
+            background={<Image src='http://www.dogbreedslist.info/uploads/allimg/dog-pictures/Dachshund-2.jpg'
+            fit='cover'
+            full={true} />}
+            size='small'
+            backgroundColorIndex='dark'>
+          <Heading margin='none'>
+            Tunousoul Massage
+          </Heading>
+      </Hero>
+      </div>
     );
   }
 }

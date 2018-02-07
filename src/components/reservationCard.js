@@ -6,7 +6,6 @@ import Form from 'grommet/components/Form';
 import Select from 'grommet/components/Select';
 import Animate from 'grommet/components/Animate';
 
-import Footer from 'grommet/components/Footer';
 import Button from 'grommet/components/Button';
 import Paragraph from 'grommet/components/Paragraph';
 import Value from 'grommet/components/Value';
@@ -65,7 +64,7 @@ class ReservationCard extends React.Component {
     disabledDate.push({ before: new Date() });
 
     this.state = {
-      stateDateSelected: undefined,
+      stateDateSelected: this.props.propsDateSelected,
       stateTimeSelected: undefined,
       stateDisabledDate: disabledDate,
     };
@@ -74,9 +73,8 @@ class ReservationCard extends React.Component {
   }
 
   buttonTxt = () => `Réserver le ${moment(this.state.stateDateSelected).format('DD/MM/YYYY')} 
-              à ${moment(this.state.stateTimeSelected, ['H:m']).format('HH:mm')}`;
-  //à ${moment(this.state.stateTimeSelected, ['h:m a', 'H:m']).format('HH:mm')}`;
-
+                     à ${moment(this.state.stateTimeSelected, ['H:m']).format('HH:mm')}`;
+  
   handleDayClick(day, { selected, disabled }) {
     if (disabled) return;
 
@@ -121,7 +119,6 @@ class ReservationCard extends React.Component {
               this.state.stateDateSelected ?
                 <Animate enter={{ "animation": "fade", "duration": 500, "delay": 0 }} >
                   <Box direction='row' align='center' margin='small' >
-                    
                     <Paragraph> <Value value="8" size="small" /> Horaires disponibles le {moment(this.state.stateDateSelected).format('DD/MM/YYYY')}:</Paragraph>
                   </Box>
 
