@@ -119,8 +119,7 @@ class ReservationCard extends React.Component {
             
             {
               this.state.stateDateSelected ?
-                <Animate enter={{ "animation": "slide-down", "duration": 500, "delay": 0 }}
-                         keep={true}>
+                <Animate enter={{ "animation": "fade", "duration": 500, "delay": 0 }} >
                   <Box direction='row' align='center' margin='small' >
                     
                     <Paragraph> <Value value="8" size="small" /> Horaires disponibles le {moment(this.state.stateDateSelected).format('DD/MM/YYYY')}:</Paragraph>
@@ -128,25 +127,24 @@ class ReservationCard extends React.Component {
 
                   <Box pad={{ horizontal: 'large' }} margin={{ bottom: 'small' }}>
                     <Select placeHolder={this.state.stateTimeSelected}
-                      options={['09:00', '10h00', '11h00', '12h00', '13h00', '14h00', '15h00', '16h00']}
-                      value={this.state.stateTimeSelected}
-                      onChange={this.handleTimeClick}
-                      margin='small'
+                            options={['09:00', '10h00', '11h00', '12h00', '13h00', '14h00', '15h00', '16h00']}
+                            value={this.state.stateTimeSelected}
+                            onChange={this.handleTimeClick}
+                            margin='small'
                     />
                   </Box>
                 </Animate> :
-                <Paragraph>Choisir le jour de la séance</Paragraph>
+                  <Paragraph>Choisir le jour de la séance</Paragraph>
             }
 
             {
               (this.state.stateDateSelected && this.state.stateTimeSelected) ?
-                <Animate enter={{ "animation": "slide-down", "duration": 500, "delay": 0 }}
-                  keep={true}>
+                <Animate enter={{ "animation": "fade", "duration": 500, "delay": 0 }}>
                   <Box align='center' pad={{ horizontal: 'small', vertical: 'small' }}>
                     <Button label={this.buttonTxt} type='submit' primary={true} />
                   </Box>
-                </Animate>
-                : <div />
+                </Animate> :
+                  <div />
             }
             
           </Box>

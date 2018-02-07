@@ -22,7 +22,7 @@ class ClassTemplate extends React.Component {
 }
 
 ClassTemplate.propTypes = {
-  classes: PropTypes.object.isRequired
+  //classes: PropTypes.object.isRequired
 };
 
 export default (ClassTemplate);
