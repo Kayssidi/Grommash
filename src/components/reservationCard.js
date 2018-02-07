@@ -73,8 +73,8 @@ class ReservationCard extends React.Component {
     this.currentMonth = new Date();
   }
 
-  buttonTxt = `Réserver le ${moment(this.state.stateDateSelected).format('DD/MM/YYYY')} 
-              à ${moment('09h00', ['H:m']).format('HH:mm')}`;
+  buttonTxt = () => `Réserver le ${moment(this.state.stateDateSelected).format('DD/MM/YYYY')} 
+              à ${moment(this.state.stateTimeSelected, ['H:m']).format('HH:mm')}`;
   //à ${moment(this.state.stateTimeSelected, ['h:m a', 'H:m']).format('HH:mm')}`;
 
   handleDayClick(day, { selected, disabled }) {
@@ -141,7 +141,7 @@ class ReservationCard extends React.Component {
               (this.state.stateDateSelected && this.state.stateTimeSelected) ?
                 <Animate enter={{ "animation": "fade", "duration": 500, "delay": 0 }}>
                   <Box align='center' pad={{ horizontal: 'small', vertical: 'small' }}>
-                    <Button label={this.buttonTxt} type='submit' primary={true} />
+                    <Button label={this.buttonTxt()} type='submit' primary={true} />
                   </Box>
                 </Animate> :
                   <div />
