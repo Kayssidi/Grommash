@@ -16,6 +16,8 @@ import FormField from "grommet/components/FormField";
 import TextInput from "grommet/components/TextInput";
 import Status from "grommet/components/icons/Status";
 
+import base from "../database/base";
+
 // http://react-day-picker.js.org/docs/getting-started/
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
@@ -64,6 +66,8 @@ class ReservationCard extends React.Component {
     this.openLayer = this.openLayer.bind(this);
     this.onLayerClosed = this.onLayerClosed.bind(this);
 
+    this.confirmDateTime = this.confirmDateTime.bind(this);
+
     // Init React States
     let disabledDate = [];
     // disable a specific date
@@ -78,12 +82,19 @@ class ReservationCard extends React.Component {
       stateTimeSelected: undefined,
       stateDisabledDate: disabledDate,
       stateAlreadyClient: false,
-      stateTimeSelectionLayer: false
+      stateTimeSelectionLayer: false,
+      stateFireBaseTest: []
     };
 
     this.currentMonth = new Date();
   }
 
+  componentWillMount() {
+    this.ref = base.syncState("/dateSelected", {
+      context: this,
+      state: "stateFireBaseTest"
+    });
+  }
   onAlreadyClient(event) {
     //    console.log(event.target.checked);
     this.setState({ stateAlreadyClient: event.target.checked });
@@ -120,6 +131,25 @@ class ReservationCard extends React.Component {
 
   handleTimeClick(time) {
     this.setState({ stateTimeSelected: time.value });
+  }
+
+  confirmDateTime() {
+    let myArray = this.state.stateFireBaseTest;
+    //let object = "value2";
+    //let object = { key: "value3" };
+    //object["key2"] = "day";
+    let object = {};
+
+    let dd = moment(this.state.stateDateSelected).format("DD/MM/YYYY");
+    let tt = moment(this.state.stateTimeSelected, ["H:m"]).format("HH:mm");
+
+    object["date"] = dd;
+    object["time"] = tt;
+    myArray.push(object);
+    this.setState({ stateFireBaseTest: myArray });
+
+    this.setState({ stateTimeSelected: undefined });
+    this.setState({ stateDateSelected: undefined });
   }
 
   render() {
@@ -220,7 +250,12 @@ class ReservationCard extends React.Component {
                 align="center"
                 pad={{ horizontal: "small", vertical: "small" }}
               >
-                <Button label={this.buttonTxt()} type="submit" primary={true} />
+                <Button
+                  label={this.buttonTxt()}
+                  type="button"
+                  primary={true}
+                  onClick={this.confirmDateTime}
+                />
               </Box>
             </Animate>
           ) : (

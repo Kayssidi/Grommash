@@ -3,8 +3,10 @@
   "description": "",
   "version": "0.0.0",
   "dependencies": {
+    "firebase": "4.9.1",
     "grommet": "1.10.1",
     "grommet-css": "1.6.0",
+    "re-base": "3.2.2",
     "react": "16.0.0",
     "react-day-picker": "7.0.7",
     "react-dom": "16.0.0"
