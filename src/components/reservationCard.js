@@ -14,6 +14,7 @@ import CheckBox from "grommet/components/CheckBox";
 import Label from "grommet/components/Label";
 import FormField from "grommet/components/FormField";
 import TextInput from "grommet/components/TextInput";
+import Status from "grommet/components/icons/Status";
 
 // http://react-day-picker.js.org/docs/getting-started/
 import DayPicker from "react-day-picker";
@@ -130,11 +131,13 @@ class ReservationCard extends React.Component {
           contentPad="none"
         >
           <Box separator="all" colorIndex="light-1" margin="small">
-            <Box pad="small">
+            <Box pad="small" direction="row">
               <CheckBox
-                label="Déjà client ?"
+                label="Déjà client(e) ?"
+                toggle={true}
                 onChange={e => this.onAlreadyClient(e)}
               />
+              {this.state.stateAlreadyClient ? <Status value="ok" /> : null}
             </Box>
             {this.state.stateAlreadyClient ? (
               <Animate enter={{ animation: "fade", duration: 500, delay: 0 }}>
