@@ -10,12 +10,18 @@ import Button from "grommet/components/Button";
 import Paragraph from "grommet/components/Paragraph";
 import Value from "grommet/components/Value";
 import Box from "grommet/components/Box";
+import CheckBox from "grommet/components/CheckBox";
+import Label from "grommet/components/Label";
+import FormField from "grommet/components/FormField";
+import TextInput from "grommet/components/TextInput";
 
 // http://react-day-picker.js.org/docs/getting-started/
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 
 import moment from "moment";
+
+import TimeSelectionComponent from "./timeSelectionComponent";
 
 const MONTHS = [
   "Janvier",
@@ -52,6 +58,10 @@ class ReservationCard extends React.Component {
     // This binding is necessary to make `this` work in the callback
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleTimeClick = this.handleTimeClick.bind(this);
+    this.onAlreadyClient = this.onAlreadyClient.bind(this);
+
+    this.openLayer = this.openLayer.bind(this);
+    this.onLayerClosed = this.onLayerClosed.bind(this);
 
     // Init React States
     let disabledDate = [];
@@ -65,10 +75,28 @@ class ReservationCard extends React.Component {
     this.state = {
       stateDateSelected: this.props.propsDateSelected,
       stateTimeSelected: undefined,
-      stateDisabledDate: disabledDate
+      stateDisabledDate: disabledDate,
+      stateAlreadyClient: false,
+      stateTimeSelectionLayer: false
     };
 
     this.currentMonth = new Date();
+  }
+
+  onAlreadyClient(event) {
+    //    console.log(event.target.checked);
+    this.setState({ stateAlreadyClient: event.target.checked });
+
+    //  console.log(this.state.stateAlreadyClient);
+  }
+
+  openLayer() {
+    this.setState({ stateTimeSelectionLayer: true });
+    console.log("open layer");
+  }
+
+  onLayerClosed() {
+    this.setState({ stateTimeSelectionLayer: false });
   }
 
   buttonTxt = () => `Réserver le ${moment(this.state.stateDateSelected).format(
@@ -102,6 +130,29 @@ class ReservationCard extends React.Component {
           contentPad="none"
         >
           <Box separator="all" colorIndex="light-1" margin="small">
+            <Box pad="small">
+              <CheckBox
+                label="Déjà client ?"
+                onChange={e => this.onAlreadyClient(e)}
+              />
+            </Box>
+            {this.state.stateAlreadyClient ? (
+              <Animate enter={{ animation: "fade", duration: 500, delay: 0 }}>
+                <Box pad="small">
+                  <FormField label="Couriel">
+                    <TextInput />
+                  </FormField>
+                  <Label>OU</Label>
+                  <FormField label="Téléphone">
+                    <TextInput />
+                  </FormField>
+                </Box>
+              </Animate>
+            ) : (
+              <Box />
+            )}
+          </Box>
+          <Box separator="all" colorIndex="light-1" margin="small">
             <DayPicker
               locale="fr"
               months={MONTHS}
@@ -129,7 +180,7 @@ class ReservationCard extends React.Component {
                   <Select
                     placeHolder={this.state.stateTimeSelected}
                     options={[
-                      "09:00",
+                      "09h00",
                       "10h00",
                       "11h00",
                       "12h00",
@@ -147,25 +198,41 @@ class ReservationCard extends React.Component {
             ) : (
               <Paragraph>Choisir le jour de la séance</Paragraph>
             )}
-
-            {this.state.stateDateSelected && this.state.stateTimeSelected ? (
-              <Animate enter={{ animation: "fade", duration: 500, delay: 0 }}>
-                <Box
-                  align="center"
-                  pad={{ horizontal: "small", vertical: "small" }}
-                >
-                  <Button
-                    label={this.buttonTxt()}
-                    type="submit"
-                    primary={true}
-                  />
-                </Box>
-              </Animate>
-            ) : (
-              <div />
-            )}
           </Box>
+
+          {this.state.stateAlreadyClient &&
+          this.state.stateDateSelected &&
+          this.state.stateTimeSelected ? (
+            <Box margin="small">
+              <FormField label="Une question? Une précision? Dites nous tout ...">
+                <TextInput />
+              </FormField>
+            </Box>
+          ) : (
+            <Box />
+          )}
+          {this.state.stateDateSelected && this.state.stateTimeSelected ? (
+            <Animate enter={{ animation: "fade", duration: 500, delay: 0 }}>
+              <Box
+                align="center"
+                pad={{ horizontal: "small", vertical: "small" }}
+              >
+                <Button label={this.buttonTxt()} type="submit" primary={true} />
+              </Box>
+            </Animate>
+          ) : (
+            <div />
+          )}
         </Card>
+        <Button
+          label="Layer"
+          type="button"
+          primary={true}
+          onClick={this.openLayer}
+        />
+        {this.state.stateTimeSelectionLayer ? (
+          <TimeSelectionComponent propCbLayerClosed={this.onLayerClosed} />
+        ) : null}
       </Form>
     );
   }

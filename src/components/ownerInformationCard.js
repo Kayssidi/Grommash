@@ -6,7 +6,6 @@ import Form from "grommet/components/Form";
 import FormField from "grommet/components/FormField";
 import TextInput from "grommet/components/TextInput";
 import Button from "grommet/components/Button";
-import CheckBox from "grommet/components/CheckBox";
 import Label from "grommet/components/Label";
 
 // http://grommet.io/docs/icon/
@@ -19,20 +18,11 @@ class OwnerInformationCard extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onAlreadyClient = this.onAlreadyClient.bind(this);
     this.onValidateInfo = this.onValidateInfo.bind(this);
 
     this.state = {
-      stateAlreadyClient: false,
       stateHasBeenValidated: false
     };
-  }
-
-  onAlreadyClient(event) {
-    //    console.log(event.target.checked);
-    this.setState({ stateAlreadyClient: event.target.checked });
-
-    //  console.log(this.state.stateAlreadyClient);
   }
 
   onValidateInfo(event) {
@@ -59,39 +49,21 @@ class OwnerInformationCard extends React.Component {
           contentPad="none"
           label={<UserIcon />}
         >
-          <CheckBox
-            label="Déjà client ?"
-            onChange={e => this.onAlreadyClient(e)}
-          />
+          <FormField label="Nom">
+            <TextInput />
+          </FormField>
 
-          {!this.state.stateAlreadyClient ? (
-            <FormField label="Nom">
-              <TextInput />
-            </FormField>
-          ) : (
-            <div />
-          )}
-          {!this.state.stateAlreadyClient ? (
-            <FormField label="Prénom">
-              <TextInput />
-            </FormField>
-          ) : (
-            <div />
-          )}
+          <FormField label="Prénom">
+            <TextInput />
+          </FormField>
 
-          {!this.state.stateAlreadyClient ? (
-            <FormField label="Adresse">
-              <TextInput />
-            </FormField>
-          ) : (
-            <div />
-          )}
+          <FormField label="Adresse">
+            <TextInput />
+          </FormField>
 
           <FormField label="Couriel">
             <TextInput />
           </FormField>
-
-          {this.state.stateAlreadyClient ? <Label>OU</Label> : <div />}
 
           <FormField label="Téléphone">
             <TextInput />

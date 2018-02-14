@@ -15,7 +15,7 @@ const MyApp = () => (
   <GrommetApp>
     <MenuHeader />
 
-    <ReservationPage />
+    <MainPage />
 
     <Footer />
   </GrommetApp>

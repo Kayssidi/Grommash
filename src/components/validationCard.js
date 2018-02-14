@@ -34,7 +34,7 @@ class ValidationCard extends React.Component {
           description="Souhaitez vous nous communiquer une information supplémentaire avant de valider la réservation de la séance?"
           contentPad="none"
         >
-          <FormField label="Dites nous tout ...">
+          <FormField label="Une question? Une précision? Dites nous tout ...">
             <TextInput />
           </FormField>
 
