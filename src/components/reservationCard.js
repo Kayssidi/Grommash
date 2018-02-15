@@ -94,12 +94,22 @@ class ReservationCard extends React.Component {
       context: this,
       state: "stateFireBaseTest"
     });
+
+    //console.log("will mount");
+    //Array.from(this.state.stateFireBaseTest, (x, i) => console.log(x));
+    //this.state.stateFireBaseTest.map(x => console.log(x));
+    //console.log(this.state.stateFireBaseTest.length);
   }
+
   onAlreadyClient(event) {
     //    console.log(event.target.checked);
     this.setState({ stateAlreadyClient: event.target.checked });
+    //console.log(this.state.stateFireBaseTest.length);
 
-    //  console.log(this.state.stateAlreadyClient);
+    //console.log(new Date(this.state.stateFireBaseTest[1].date));
+    {
+      this.state.stateFireBaseTest.forEach((x, i) => console.log(x.date));
+    }
   }
 
   openLayer() {
@@ -146,6 +156,7 @@ class ReservationCard extends React.Component {
     object["date"] = dd;
     object["time"] = tt;
     myArray.push(object);
+
     this.setState({ stateFireBaseTest: myArray });
 
     this.setState({ stateTimeSelected: undefined });
@@ -154,12 +165,15 @@ class ReservationCard extends React.Component {
 
   render() {
     return (
-      <Form>
+      <Box>
         <Card
           heading="Réserver une séance"
           description="Choisir une date et un crénau horaire."
           contentPad="none"
         >
+          {this.state.stateFireBaseTest.map((x, i) => (
+            <Label id={i}>{x.date}</Label>
+          ))}
           <Box separator="all" colorIndex="light-1" margin="small">
             <Box pad="small" direction="row">
               <CheckBox
@@ -271,7 +285,7 @@ class ReservationCard extends React.Component {
         {this.state.stateTimeSelectionLayer ? (
           <TimeSelectionComponent propCbLayerClosed={this.onLayerClosed} />
         ) : null}
-      </Form>
+      </Box>
     );
   }
 }

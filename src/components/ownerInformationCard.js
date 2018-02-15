@@ -8,9 +8,12 @@ import TextInput from "grommet/components/TextInput";
 import Button from "grommet/components/Button";
 import Label from "grommet/components/Label";
 
+import base from "../database/base";
+
 // http://grommet.io/docs/icon/
 import UserIcon from "grommet/components/icons/base/User";
 import ValidateIcon from "grommet/components/icons/base/Validate";
+import Status from "grommet/components/icons/Status";
 
 class OwnerInformationCard extends React.Component {
   state = {};
@@ -21,62 +24,70 @@ class OwnerInformationCard extends React.Component {
     this.onValidateInfo = this.onValidateInfo.bind(this);
 
     this.state = {
-      stateHasBeenValidated: false
+      stateHasBeenValidated: false,
+      stateOwnersInformation: undefined
     };
   }
 
   onValidateInfo(event) {
     event.preventDefault();
-    this.setState({ stateHasBeenValidated: true });
-    console.log(this.state.stateHasBeenValidated);
-  }
+    //this.setState({ stateHasBeenValidated: true });
+    //console.log(this.state.stateHasBeenValidated);
+    let userObject = {
+      nom: this.refs.refNom.componentRef.value,
+      prenom: this.refs.refPrenom.componentRef.value,
+      adresse: this.refs.refAdresse.value,
+      couriel: this.refs.refCouriel.componentRef.value,
+      telephone: this.refs.refTelephone.componentRef.value
+    };
+    console.log(userObject);
+    //console.log(this.refs.refAdresse);
 
-  buttonLabel = () =>
-    !this.state.stateHasBeenValidated ? (
-      <Label>Valider</Label>
-    ) : (
-      <div>
-        <Label>Valider</Label>
-        <ValidateIcon />
-      </div>
-    );
+    base
+      .push(`users/`, { data: userObject })
+      .then(() => {
+        this.setState({ stateHasBeenValidated: true });
+      })
+      .catch(err => {
+        // handle error
+      });
+  }
 
   render() {
     return (
-      <Form>
-        <Card
-          description="Comment pouvons nous vous joindre:"
-          contentPad="none"
-          label={<UserIcon />}
-        >
-          <FormField label="Nom">
-            <TextInput />
-          </FormField>
+      <Card
+        description="Comment pouvons nous vous joindre:"
+        contentPad="none"
+        label={<UserIcon />}
+      >
+        <FormField label="Nom">
+          <TextInput ref="refNom" />
+        </FormField>
 
-          <FormField label="Prénom">
-            <TextInput />
-          </FormField>
+        <FormField label="Prénom">
+          <TextInput ref="refPrenom" />
+        </FormField>
 
-          <FormField label="Adresse">
-            <TextInput />
-          </FormField>
+        <FormField label="Adresse">
+          <textarea rows="3" type="text" ref="refAdresse" />
+        </FormField>
 
-          <FormField label="Couriel">
-            <TextInput />
-          </FormField>
+        <FormField label="Couriel">
+          <TextInput ref="refCouriel" />
+        </FormField>
 
-          <FormField label="Téléphone">
-            <TextInput />
-          </FormField>
+        <FormField label="Téléphone">
+          <TextInput ref="refTelephone" />
+        </FormField>
 
-          <Button
-            label={this.buttonLabel()}
-            type="submit"
-            primary={true}
-            onClick={e => this.onValidateInfo(e)}
-          />
-        </Card>
-      </Form>
+        <Button
+          label="Valider"
+          type="button"
+          primary={true}
+          onClick={e => this.onValidateInfo(e)}
+          icon={this.state.stateHasBeenValidated ? <Status value="ok" /> : null}
+        />
+      </Card>
     );
   }
 }

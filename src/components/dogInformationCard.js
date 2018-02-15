@@ -27,31 +27,29 @@ class DogInformationCard extends React.Component {
 
   render() {
     return (
-      <Form>
-        <Card
-          label={<FavIcon />}
-          description="Dites nous en plus sur votre animal:"
-          contentPad="none"
-        >
-          <FormField label="Nom">
-            <TextInput />
-          </FormField>
+      <Card
+        label={<FavIcon />}
+        description="Dites nous en plus sur votre animal:"
+        contentPad="none"
+      >
+        <FormField label="Nom">
+          <TextInput />
+        </FormField>
 
-          <FormField label="Age">
-            <TextInput />
-          </FormField>
+        <FormField label="Age">
+          <TextInput />
+        </FormField>
 
-          <FormField label="Race">
-            <TextInput />
-          </FormField>
+        <FormField label="Race">
+          <TextInput />
+        </FormField>
 
-          <FormField label="Eventuelle pathologie">
-            <TextInput />
-          </FormField>
+        <FormField label="Eventuelle pathologie">
+          <textarea rows="5" type="text" />
+        </FormField>
 
-          <Button label="Valider" type="submit" primary={true} />
-        </Card>
-      </Form>
+        <Button label="Valider" type="submit" primary={true} />
+      </Card>
     );
   }
 }
